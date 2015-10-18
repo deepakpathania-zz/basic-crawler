@@ -50,7 +50,6 @@ def crawl_web(seed): ##crawls the links present in tocrawl and adds to crawled a
     return crawled
 
 result = crawl_web("https://www.udacity.com/cs101x/index.html")  ##sample test case
-i=0
-while i < len(result):
-    print result[i]
-    i=i+1
+
+for temp in result:  ##printing the links found
+    print temp
