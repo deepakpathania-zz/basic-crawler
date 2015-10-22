@@ -49,7 +49,39 @@ def crawl_web(seed): ##crawls the links present in tocrawl and adds to crawled a
             
     return crawled
 
-result = crawl_web("https://www.udacity.com/cs101x/index.html")  ##sample test case
+def  add_to_index(index,keyword,url): ##entries added to index
+    for entry in index:
+        if entry[0]==keyword:
+            entry[1].append(url)
+            return
+    index.append([keyword,[url]])
 
-for temp in result:  ##printing the links found
-    print temp
+def lookup(index,keyword): ##responding to querries by finding entries in index
+    ind_list=[]
+    for entry in index:
+        if entry[0]==keyword:
+            return entry[1]
+    return ind_list
+
+def add_page_to_index(index,url,content): ##page added to index
+    words=content.split()
+    for word in words:
+        add_to_index(index,word,url)
+    
+
+result = crawl_web("https://www.udacity.com/cs101x/index.html")  ##sample test case
+i=0
+while i < len(result):
+    print result[i]
+    i=i+1
+index=[]
+add_page_to_index(index,"http://dilbert.com", 
+                  """
+Another strategy is to ignore the fact that you are solowly killing yourself
+by not sleeping and exercising enough.
+""" ) ##sample test for indexing
+
+print index
+
+print lookup(index,"strategy") ##sample test for responding to querries
+
